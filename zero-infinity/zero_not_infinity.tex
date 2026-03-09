@@ -1,0 +1,272 @@
+\documentclass[12pt, a4paper]{article}
+
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{parskip}
+\usepackage{xcolor}
+
+\geometry{margin=2.5cm}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue!60!black,
+    urlcolor=blue!60!black
+}
+
+% Theorem environments
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{observation}{Observation}
+
+% Title formatting
+\titleformat{\section}{\large\bfseries}{}{0em}{}[\titlerule]
+\titleformat{\subsection}{\normalsize\bfseries\itshape}{}{0em}{}
+
+\title{\textbf{On the Distinction Between Zero and Infinity}}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\vspace{1cm}
+
+\noindent\textit{A self-directed mathematical exploration examining why zero and infinity are fundamentally distinct, approached through multiple lenses: real analysis, contradiction, limit theory, and set-theoretic foundations.}
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.8cm}
+
+%----------------------------------------------
+\section{First Pass: What is Zero?}
+%----------------------------------------------
+
+Before proving anything, we must understand what zero actually \textit{is}. As it turns out, mathematics gives us more than one definition of zero, each revealing a different facet of its nature.
+
+\subsection{Zero in $\mathbb{R}$: The Additive Identity}
+
+In the real number system $\mathbb{R}$, zero is defined as the \textbf{additive identity}:
+\[
+\forall\, x \in \mathbb{R},\quad x + 0 = x.
+\]
+This property uniquely determines $0$: if there were another element $0'$ satisfying $x + 0' = x$ for all $x$, then $0 = 0 + 0' = 0'$. So zero is the \emph{unique} additive identity of $\mathbb{R}$.
+
+\subsection{Zero in Peano Arithmetic}
+
+In the axiomatic foundation of the natural numbers via the Peano axioms, zero is defined as the \textbf{first natural number} — the unique natural number with no predecessor. All other natural numbers are successors of some natural number; zero alone has none.
+
+\subsection{Zero in Set Theory (Von Neumann Construction)}
+
+In the Von Neumann construction of the natural numbers, zero is identified with the \textbf{empty set}:
+\[
+0 := \emptyset.
+\]
+Each subsequent natural number is then defined as the set of all preceding ones:
+\[
+1 := \{0\} = \{\emptyset\},\quad 2 := \{0,1\} = \{\emptyset, \{\emptyset\}\},\quad 3 := \{0,1,2\},\quad \ldots
+\]
+In this construction, zero is literally nothingness — the set containing no elements. This is perhaps the most philosophically striking definition: \emph{zero is empty sets all the way down}.
+
+%----------------------------------------------
+\section{Method 1: The Real Number System}
+%----------------------------------------------
+
+\begin{theorem}
+$0 \neq \infty$ in the real number system $\mathbb{R}$.
+\end{theorem}
+
+\begin{proof}
+In $\mathbb{R}$, every real number is finite and well-defined. The symbol $\infty$ is not an element of $\mathbb{R}$ — it does not belong to the set of real numbers. Since equality is defined only between elements of the same set, the expression $0 = \infty$ is not even a well-formed mathematical statement within $\mathbb{R}$: we have $0 \in \mathbb{R}$ but $\infty \notin \mathbb{R}$, so they cannot be compared as equal.
+
+Therefore, $0 \neq \infty$.
+\end{proof}
+
+\begin{remark}
+One might object: what about the \textbf{extended real line} $\overline{\mathbb{R}} = \mathbb{R} \cup \{+\infty, -\infty\}$? Here $\infty$ is formally adjoined as a symbol with a defined order: for every real $x$, we declare $x < \infty$. Since $0 \in \mathbb{R}$, we have $0 < \infty$, which immediately gives $0 \neq \infty$ in $\overline{\mathbb{R}}$ as well.
+\end{remark}
+
+%----------------------------------------------
+\section{Method 2: Proof by Contradiction}
+%----------------------------------------------
+
+\begin{theorem}
+$0 \neq \infty$.
+\end{theorem}
+
+\begin{proof}
+Assume for contradiction that $0 = \infty$.
+
+By the definition of $\infty$ (as used in the extended real line), for every real number $M$:
+\[
+\infty > M.
+\]
+Taking $M = 0$, this gives $\infty > 0$.
+
+But if $0 = \infty$, then substituting:
+\[
+0 > 0,
+\]
+which is false (no real number is strictly greater than itself, by the irreflexivity of $<$).
+
+This is a contradiction. Therefore our assumption was false, and $0 \neq \infty$.
+\end{proof}
+
+%----------------------------------------------
+\section{Method 3: Limit Theory (Infinity as a Direction)}
+%----------------------------------------------
+
+The most illuminating argument may be this: infinity is not a \emph{number} — it is a \emph{direction}, a description of unbounded growth. The following makes this precise.
+
+\begin{definition}[Limit at Infinity]
+We write $\displaystyle\lim_{x \to \infty} f(x) = L$ to mean: for every $\varepsilon > 0$, there exists $M$ such that
+\[
+x > M \implies |f(x) - L| < \varepsilon.
+\]
+The notation ``$x \to \infty$'' means $x$ \textbf{becomes arbitrarily large} — it is a description of a process, not a substitution of a value.
+\end{definition}
+
+\begin{proposition}
+$\displaystyle\lim_{x \to \infty} \frac{1}{x} = 0$, but this does \emph{not} mean $\dfrac{1}{\infty} = 0$.
+\end{proposition}
+
+\begin{proof}
+We prove the limit rigorously. Given $\varepsilon > 0$, choose $M = \dfrac{1}{\varepsilon}$. Then for any $x > M$:
+\[
+\left|\frac{1}{x} - 0\right| = \frac{1}{x} < \frac{1}{M} = \varepsilon.
+\]
+Hence $\displaystyle\lim_{x \to \infty} \frac{1}{x} = 0$.
+
+Crucially, in this entire proof we never substituted $x = \infty$. We only analyzed the \emph{behavior} of $\frac{1}{x}$ as $x$ grows without bound. The symbol $\infty$ here describes a \emph{direction of unbounded growth}, not a number one can substitute.
+\end{proof}
+
+\begin{observation}
+This demonstrates that ``$x \to \infty$'' means $x$ becomes arbitrarily large. \textbf{Infinity is a direction of unbounded growth. It is not an element of $\mathbb{R}$.} Hence $0 \neq \infty$.
+\end{observation}
+
+%----------------------------------------------
+\section{A Richer Example: Rates of Decay}
+%----------------------------------------------
+
+To see this more clearly, consider:
+\[
+\lim_{x \to \infty} \frac{x}{x+1}.
+\]
+Dividing numerator and denominator by $x$:
+\[
+\lim_{x \to \infty} \frac{1}{1 + \frac{1}{x}}.
+\]
+Since $\frac{1}{x} \to 0$, this limit equals $\dfrac{1}{1+0} = 1$.
+
+Again, we never substituted $x = \infty$. We analyzed behavior. This distinction is fundamental.
+
+\subsection{Which function tends to zero faster: $\frac{1}{x}$ or $\frac{1}{x^2}$?}
+
+We say $f(x)$ goes to $0$ faster than $g(x)$ if $\displaystyle\lim_{x\to\infty} \frac{f(x)}{g(x)} = 0$.
+
+\begin{proposition}
+$\dfrac{1}{x^2}$ tends to $0$ faster than $\dfrac{1}{x}$.
+\end{proposition}
+
+\begin{proof}
+Let $f(x) = \dfrac{1}{x^2}$ and $g(x) = \dfrac{1}{x}$. Then:
+\[
+\frac{f(x)}{g(x)} = \frac{1/x^2}{1/x} = \frac{1}{x^2} \cdot \frac{x}{1} = \frac{1}{x}.
+\]
+Taking the limit:
+\[
+\lim_{x \to \infty} \frac{f(x)}{g(x)} = \lim_{x \to \infty} \frac{1}{x} = 0.
+\]
+Therefore $\dfrac{1}{x^2}$ goes to zero faster than $\dfrac{1}{x}$.
+\end{proof}
+
+\begin{remark}
+\textbf{Why does this work conceptually?} Because $x^2$ grows faster than $x$, a faster-growing denominator produces a faster-decaying fraction. This is the standard comparison criterion for rates of decay.
+\end{remark}
+
+\subsection{Formal $\varepsilon$-$M$ proof that $\displaystyle\lim_{x\to\infty} \frac{1}{x^2} = 0$}
+
+\begin{proof}
+Given $\varepsilon > 0$, we need $\left|\dfrac{1}{x^2} - 0\right| < \varepsilon$, i.e., $\dfrac{1}{x^2} < \varepsilon$ (since $\dfrac{1}{x^2} > 0$).
+
+This requires $x^2 > \dfrac{1}{\varepsilon}$, i.e., $x > \dfrac{1}{\sqrt{\varepsilon}}$.
+
+Choose $M = \dfrac{1}{\sqrt{\varepsilon}}$. Then for $x > M$:
+\[
+\frac{1}{x^2} < \frac{1}{M^2} = \varepsilon.
+\]
+Hence the limit is $0$.
+\end{proof}
+
+%----------------------------------------------
+\section{Method 4: Set-Theoretic Infinity (Cardinality)}
+%----------------------------------------------
+
+Set theory reveals yet another face of infinity — one completely different from the analytic notion above.
+
+\begin{definition}[Infinite Set — Dedekind]
+A set $S$ is \textbf{infinite} if it can be put in one-to-one correspondence with a proper subset of itself.
+\end{definition}
+
+\begin{example}
+The natural numbers $\mathbb{N}$ are infinite: the map $n \mapsto 2n$ is a bijection between $\mathbb{N}$ and $2\mathbb{N}$ (the even naturals), a proper subset. So $\mathbb{N} \sim 2\mathbb{N}$, and both have the same infinite size.
+\end{example}
+
+The cardinality of $\mathbb{N}$ is denoted $\aleph_0$ (aleph-null). This is a completely different concept of infinity from the $\infty$ of limits — it measures the \emph{size} of a set, not a direction of growth.
+
+\begin{observation}
+There are in fact \textbf{different sizes of infinity}. Cantor proved that $|\mathbb{R}| > |\mathbb{N}|$ — the real numbers are a ``larger'' infinity than the natural numbers. So infinity is not even a single thing; it fractures into an entire hierarchy.
+
+Zero, by contrast, is unique: the empty set has exactly one cardinality, $0$.
+\end{observation}
+
+%----------------------------------------------
+\section{Synthesis and Final Statement}
+%----------------------------------------------
+
+\begin{theorem}[Summary]
+$0 \neq \infty$, and the two concepts belong to fundamentally different categories.
+\end{theorem}
+
+We have seen this from four angles:
+
+\begin{enumerate}
+    \item \textbf{Real analysis:} $\infty \notin \mathbb{R}$, so $0 = \infty$ is not even a well-formed statement in $\mathbb{R}$; and in $\overline{\mathbb{R}}$ we have $0 < \infty$ by definition.
+
+    \item \textbf{Contradiction:} Assuming $0 = \infty$ leads to $0 > 0$, which violates the irreflexivity of the order on $\mathbb{R}$.
+
+    \item \textbf{Limit theory:} $\infty$ is a \emph{direction} describing unbounded growth, not a number. It is a shorthand for a limiting process, never a value to substitute.
+
+    \item \textbf{Set theory:} Infinite cardinalities like $\aleph_0$ are entirely different kinds of objects from the number $0 = |\emptyset|$, the cardinality of the empty set.
+\end{enumerate}
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.8cm}
+
+\noindent\textbf{The real question, left open:}
+
+\begin{center}
+\itshape Why does mathematics refuse to treat infinity as an ordinary number?
+\end{center}
+
+The short answer: because treating $\infty$ as an ordinary number breaks arithmetic. If $\infty - \infty$ and $\frac{\infty}{\infty}$ were defined as numbers, we could derive contradictions like $1 = 2$. Mathematics sacrifices the convenience of calling $\infty$ a number in order to preserve the consistency of the entire structure.
+
+This is a question worth sitting with. The full answer leads into the theory of \emph{surreal numbers}, \emph{non-standard analysis} (where infinitesimals and infinite numbers are made rigorous), and the \emph{projective line} $\mathbb{P}^1$. Each is a different way mathematics has tried to carefully extend the number system to include infinite quantities — always with new rules, never the old ones unchanged.
+
+\vspace{1cm}
+\begin{center}
+\textit{``The infinite! No other question has ever moved so profoundly the spirit of man.''} \\
+--- David Hilbert
+\end{center}
+
+\end{document}

@@ -1,0 +1,11 @@
+# On the Distinction Between Zero and Infinity
+
+An exploration of why zero and infinity are fundamentally distinct 
+mathematical objects, approached through four frameworks: real analysis, 
+proof by contradiction, limit theory, and set-theoretic cardinality.
+
+Written as part of independent study of Tao's Analysis I (2026).
+
+## Files
+- `on-the-distinction.pdf` — compiled document  
+- `on-the-distinction.tex` — LaTeX source
